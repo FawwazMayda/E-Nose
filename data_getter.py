@@ -20,13 +20,27 @@ print(args.outfile,type(args.outfile))
 count = 0
 
 ser = serial.Serial(args.port,args.baud_rate)
-
+header = "id,s0,s1,s2,s3,s4,s5,s6,s7,timestamp"
+first = True
 
 with open(args.outfile,"w") as f:
     while 1:
+        if first:
+            f.writelines(header)
         line = ser.readline()
         cur_id = line.split(",")[0]
         if cur_id <= args.max_id:
-            f.write(line)
+            f.writelines(line)
         else:
             break
+
+#Data Process with Panda
+method = ['max','mean']
+
+df1 = pd.read_csv(args.outfile).drop('timestamp')
+
+for m in method:
+    if m =='max':
+        df1.groupby("id",axis=1).max().to_csv("max_"+args.outfile)
+    elif m =='mean':
+        df1.groupby("id",axis=1).mean().to_csv("mean_"+args.outfile)
