@@ -33,23 +33,23 @@ void cetak(){
   s5 = analogRead(sensor5);
   s6 = analogRead(sensor6);
   s7 = analogRead(sensor7);
-  Serial.print(id);
-  Serial.print(",");
-  Serial.print(s0);
-  Serial.print(",");
-  Serial.print(s1);
-  Serial.print(",");
-  Serial.print(s2);
-  Serial.print(",");
-  Serial.print(s3);
-  Serial.print(",");
-  Serial.print(s4);
-  Serial.print(",");
-  Serial.print(s5);
-  Serial.print(",");
-  Serial.print(s6);
-  Serial.print(",");
-  Serial.println(s7);
+  String s ="";
+  s += String(s0);
+  s += ",";
+  s += String(s1);
+  s += ",";
+  s += String(s2);
+  s += ",";
+  s += String(s3);
+  s += ",";
+  s += String(s4);
+  s += ",";
+  s += String(s5);
+  s += ",";
+  s += String(s6);
+  s += ",";
+  s += String(s7);
+  Serial.println(s);
 }
 void loop() {
 
