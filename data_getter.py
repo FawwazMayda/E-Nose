@@ -27,6 +27,7 @@ with open(args.outfile,"w") as f:
     while 1:
         if first:
             f.writelines(header)
+            first = False
         line = ser.readline()
         cur_id = line.split(",")[0]
         if cur_id <= args.max_id:
