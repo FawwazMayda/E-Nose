@@ -29,18 +29,19 @@ with open(args.outfile,"w") as f:
             f.write(header)
             f.write("\n")
             first = False
+        ser.reset_input_buffer()
         line = str(ser.readline().decode('utf-8'))
         line = line [:-2]
         print(line)
-        print(cur_id)
-        f.write(line)
-        f.write("\n")
-        #if cur_id <= args.max_id:
-        #    f.write(line)
-        #    cur_id+=1
-        #else:
-        #    break
-
+        print("Data: "+str(cur_id))
+        cur_id +=1
+        if cur_id <= args.max_id:
+            f.write(line)
+            f.write("\n")
+            cur_id+=1
+        else:
+            break
+"""
 #Data Process with Panda
 method = ['max','mean']
 
@@ -51,3 +52,4 @@ for m in method:
         df1.groupby("id",axis=1).max().to_csv("max_"+args.outfile)
     elif m =='mean':
         df1.groupby("id",axis=1).mean().to_csv("mean_"+args.outfile)
+"""
