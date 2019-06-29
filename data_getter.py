@@ -22,18 +22,24 @@ count = 0
 ser = serial.Serial(args.port,args.baud_rate)
 header = "id,s0,s1,s2,s3,s4,s5,s6,s7,timestamp"
 first = True
-
+cur_id = 0
 with open(args.outfile,"w") as f:
     while 1:
         if first:
-            f.writelines(header)
+            f.write(header)
+            f.write("\n")
             first = False
-        line = ser.readline()
-        cur_id = line.split(",")[0]
-        if cur_id <= args.max_id:
-            f.writelines(line)
-        else:
-            break
+        line = str(ser.readline().decode('utf-8'))
+        line = line [:-2]
+        print(line)
+        print(cur_id)
+        f.write(line)
+        f.write("\n")
+        #if cur_id <= args.max_id:
+        #    f.write(line)
+        #    cur_id+=1
+        #else:
+        #    break
 
 #Data Process with Panda
 method = ['max','mean']
